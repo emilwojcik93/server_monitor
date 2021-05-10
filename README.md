@@ -1,4 +1,4 @@
-##Introduction
+## Introduction
 
 This script is used to control server power according to critical services status.
 Services which are checked by script:
@@ -18,7 +18,7 @@ libsystemd-dev gcc make build-essential libc6 libstdc++6 libssl-dev libffi-dev p
 
 sudo pip3 install systemd
 ```
-### Installation
+## Installation
 This script is written to execute as systemd-service. To configure it properly please follow above steps:
 1. Download script to location `/opt/server_check`
 ```
