@@ -24,7 +24,8 @@ This script is written to execute as systemd-service. To configure it properly p
 ```
 curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/server_check.py' -o "/opt/server_check.py" && chmod 755 "/opt/server_check.py"
 ```
-2. Create systemd-service by executing following commnad from **root user**:
+2. Edit values of credentials variables `username` and `password` in function `empty_downloads` (line 32).
+3. Create systemd-service by executing following commnad from **root user**:
 ```
 cat <<EOF > /lib/systemd/system/server_check.service
 [Unit]
@@ -43,7 +44,7 @@ RestartSec=10
 WantedBy=multi-user.target
 EOF
 ```
-3. Enable and start systemd-service by:
+4. Enable and start systemd-service by:
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable server_check.service
