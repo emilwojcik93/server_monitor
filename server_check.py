@@ -69,7 +69,7 @@ while True:
 #            logger.info("Server is idlee")
         else:
             return True
-            logger.info("Server is busy")
+#            logger.info("Server is busy")
 
     if not server_is_busy():
         time.sleep(2)
