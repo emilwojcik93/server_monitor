@@ -1,7 +1,6 @@
 ## Introduction
 
-This script is used to control server power according to critical services status.
-Services which are checked by script:
+This script is used to control server power according to status of critical services:
 - qBittorrent Nox
 - SMB connections
 - SSH connections
