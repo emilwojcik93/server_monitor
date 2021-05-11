@@ -46,7 +46,7 @@ def ssh_has_connected_clients():
         return True
 
 def server_is_busy():
-    if empty_downloads() and not samba_has_connected_clients() and ssh_has_connected_clients():
+    if empty_downloads() and not samba_has_connected_clients() and not ssh_has_connected_clients():
         return False
     else:
         return True

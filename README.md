@@ -13,42 +13,61 @@ sudo apt-get update && sudo apt-get install python3 python3-pip curl nano
 ```
 ## Installation
 
-## Auto installation
-This oneliner below download needed dependencies and setting them up:
-   Server side -- server_check:
+### Auto installation
+Those oneliners below download needed dependencies and setting them up:
+#### Server side (server_check)
 ```
 sudo true && \
 sudo curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/server_check.py' -o "/opt/server_check.py" && sudo chmod 755 "/opt/server_check.py" && \
 sudo curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/server_check.service' -o "/lib/systemd/system/server_check.service" && \
-echo -e "Please change <user> <pass> in ExecStart (line 8)\nThen press CTRL+x, then Enter" && \
+echo -e "Please change \e[91m<user> <pass>\e[0m in \e[91mExecStart\e[0m (line 8)\nThen press \e[91mCTRL+x\e[0m, then \e[91mEnter\e[0m" && \
 sleep 5 && \
 sudo nano /lib/systemd/system/server_check.service && \
 sudo systemctl daemon-reload && \
 sudo systemctl enable server_check.service && \
-sudo systemctl start server_check.service
+sudo systemctl start server_check.service && \
+sudo systemctl status server_check.service
 ```
-   Router side -- server_start:
+#### Router side (server_start)
 ```
-curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/server-start.sh' -o "/bin/server-start.sh" && sudo chmod 755 "/bin/server-start.sh" && \
-curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/server-start' -o "/etc/init.d/server-start" && \
-/etc/init.d/server-start start
+curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start.sh' -o "/bin/server-start.sh" && sudo chmod 755 "/bin/server-start.sh" && \
+curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start' -o "/etc/init.d/server-start" && \
+/etc/init.d/server-start start && \
+ps | grep server-start
 ```
 ### Manual installation
+#### Server Side (server_check)
 This script is written to execute as systemd-service. To configure it properly please follow above steps:
 1. Download script to location `/opt/server_check`
 ```
 sudo curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/server_check.py' -o "/opt/server_check.py" && sudo chmod 755 "/opt/server_check.py"
 ```
-2. Edit values of credentials variables `username` and `password` in function `empty_downloads` (line 32).
-3. Create systemd-service by executing following commnad from **root user**:
+2. Create systemd service by executing following commnad from **root user**:
 
-   Please change `<user> <pass>` in `ExecStart` (line 8)
+   Please change value of arguments `<user>` and `<pass>` in `ExecStart` (line 8)
 ```
 sudo curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/server_check.service' -o "/lib/systemd/system/server_check.service"
 ```
-4. Enable and start systemd-service by:
+3. Enable and start systemd-service by:
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable server_check.service
 sudo systemctl start server_check.service
+sudo systemctl status server_check.service
+```
+
+#### Router side (server_start)
+1. Download script to location `/bin/server-start.sh`
+```
+curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start.sh' -o "/bin/server-start.sh" && sudo chmod 755 "/bin/server-start.sh"
+```
+2.  Create init.d service by executing following commnad:
+```
+curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start' -o "/etc/init.d/server-start"
+```
+3. Enable and start systemd-service by:
+```
+/etc/init.d/server-start start && \
+/etc/init.d/server-start enable && \
+ps | grep server-start
 ```
