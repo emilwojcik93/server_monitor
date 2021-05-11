@@ -30,10 +30,11 @@ sudo systemctl status server_check.service
 ```
 #### Router side (server_start)
 ```
-curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start.sh' -o "/bin/server-start.sh" && sudo chmod 755 "/bin/server-start.sh" && \
-curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start' -o "/etc/init.d/server-start" && \
+curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start.sh' -o "/bin/server-start.sh" && chmod 755 "/bin/server-start.sh" && \
+curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start' -o "/etc/init.d/server-start" && chmod 755 "/etc/init.d/server-start" && \
 /etc/init.d/server-start start && \
-ps | grep server-start
+/etc/init.d/server-start enable && \
+ps | grep server-start | grep -v grep
 ```
 ### Manual installation
 #### Server Side (server_check)
@@ -59,15 +60,15 @@ sudo systemctl status server_check.service
 #### Router side (server_start)
 1. Download script to location `/bin/server-start.sh`
 ```
-curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start.sh' -o "/bin/server-start.sh" && sudo chmod 755 "/bin/server-start.sh"
+curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start.sh' -o "/bin/server-start.sh" && chmod 755 "/bin/server-start.sh"
 ```
 2.  Create init.d service by executing following commnad:
 ```
-curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start' -o "/etc/init.d/server-start"
+curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/main/openwrt/server-start' -o "/etc/init.d/server-start" && chmod 755 "/etc/init.d/server-start"
 ```
 3. Enable and start systemd-service by:
 ```
 /etc/init.d/server-start start && \
 /etc/init.d/server-start enable && \
-ps | grep server-start
+ps | grep server-start | grep -v grep
 ```
