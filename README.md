@@ -25,6 +25,7 @@ sudo curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_check/mai
 ```
 2. Edit values of credentials variables `username` and `password` in function `empty_downloads` (line 32).
 3. Create systemd-service by executing following commnad from **root user**:
+Please change "<user> <pass>" in "ExecStart"
 ```
 cat <<EOF > /lib/systemd/system/server_check.service
 [Unit]
@@ -34,7 +35,7 @@ After=network.target
 
 [Service]
 Type=idle
-ExecStart=/usr/bin/python3 /opt/server_check.py
+ExecStart=/usr/bin/python3 /opt/server_check.py <user> <pass>
 Restart=always
 TimeoutStartSec=10
 RestartSec=10
