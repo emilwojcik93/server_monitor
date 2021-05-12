@@ -7,7 +7,7 @@ This script is used to control server power according to status of critical serv
 
 
 ## Requipments
-This script require:
+These scripts require :
 #### Server side
 Script is written in python3, to work properly it need interpreter and dependencies
 ```
