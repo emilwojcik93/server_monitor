@@ -7,9 +7,16 @@ This script is used to control server power according to status of critical serv
 
 
 ## Requipments
-This script is written in python3, to work properly it need interpreter and dependencies
+This script require:
+#### Server side
+Script is written in python3, to work properly it need interpreter and dependencies
 ```
 sudo apt-get update && sudo apt-get install python3 python3-pip curl nano
+```
+#### Router side
+Script is writen to check nginx access.log file and use inotifywait:
+```
+opkg update && opkg install inotifywait
 ```
 ## Installation
 
