@@ -39,8 +39,9 @@ def samba_has_connected_clients():
         return False
 
 def ssh_has_connected_clients():
-    status_ssh = ['ss']
-    if len(subprocess.check_output(status_ssh).decode('utf-8').split('\n')) == 0:
+    cmd = "ss | grep -i ssh"
+    status_ssh = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+    if len(status_ssh.communicate()[0]) == 0:
         return False
     else:
         return True
