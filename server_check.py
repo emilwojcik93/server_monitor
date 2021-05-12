@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-# service name (also used for logging purpose in journalctl)
-import server_check
 import sys
 import os
 import json
