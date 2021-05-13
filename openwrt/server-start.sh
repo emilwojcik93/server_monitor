@@ -1,11 +1,11 @@
 #!/bin/sh
 iface=$1
 mac=$2
-while true; do
-  while inotifywait -e modify /var/log/nginx/access.log; do
-    if tail -n1 /var/log/nginx/access.log | grep 502; then
-      /usr/bin/etherwake -D -i "$iface" "$mac" 2>&1
-      sleep 5
-    fi
-  done
+target=$3
+
+tcpdump -i $iface -U -s0 dst $target | while read -r line; do
+  if ! ping -q -W 1 -c 1 $target >/dev/null; then
+    /usr/bin/etherwake -D -i "$iface" "$mac" 2>&1
+    sleep 10
+  fi
 done
