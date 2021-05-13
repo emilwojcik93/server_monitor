@@ -4,7 +4,7 @@ mac=$2
 while true; do
   while inotifywait -e modify /var/log/nginx/access.log; do
     if tail -n1 /var/log/nginx/access.log | grep 502; then
-      /usr/bin/etherwake -D -i '$iface' "$mac" 2>&1
+      /usr/bin/etherwake -D -i "$iface" "$mac" 2>&1
       sleep 5
     fi
   done
