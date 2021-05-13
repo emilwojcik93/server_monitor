@@ -16,7 +16,7 @@ sudo apt-get update && sudo apt-get install python3 python3-pip curl nano
 #### Router side
 Script is writen to check nginx access.log file and use inotifywait:
 ```
-opkg update && opkg install inotifywait
+opkg update && opkg install tcpdump
 ```
 ## Installation
 
