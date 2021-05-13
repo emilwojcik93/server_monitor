@@ -7,7 +7,7 @@ USE_PROCD=1
 
 start_service() {
         procd_open_instance
-        procd_set_param command /bin/server-start.sh <iface> <mac> <target>
+        procd_set_param command /bin/server-start.sh <iface> <skip_ip_addr> <mac> <target>
         procd_set_param respawn
         procd_close_instance
 }
