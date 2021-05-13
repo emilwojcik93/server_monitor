@@ -13,8 +13,8 @@ Script is written in python3, to work properly it need interpreter and dependenc
 ```
 sudo apt-get update && sudo apt-get install python3 python3-pip curl nano
 ```
-#### Router side
-Script is writen to check nginx access.log file and use inotifywait:
+#### OpenWRT router side
+Script is writen to check TCPdump output:
 ```
 opkg update && opkg install tcpdump
 ```
@@ -26,9 +26,9 @@ Those oneliners below download needed dependencies and setting them up:
 ```
 curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_monitor/main/autoinstall-server_check.sh' -o "/tmp/autoinstall.sh" && chmod 755 "/tmp/autoinstall.sh" && /tmp/autoinstall.sh && rm /tmp/autoinstall.sh
 ```
-#### Router side (server_start)
+#### OpenWRT router side (server_start)
 ```
-curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_monitor/main/autoinstall-server_start.sh' -o "/tmp/autoinstall.sh" && chmod 755 "/tmp/autoinstall.sh" && /tmp/autoinstall.sh && rm /tmp/autoinstall.sh
+opkg update && opkg install curl && curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_monitor/main/autoinstall-server_start.sh' -o "/tmp/autoinstall.sh" && chmod 755 "/tmp/autoinstall.sh" && /tmp/autoinstall.sh && rm /tmp/autoinstall.sh
 ```
 ### Manual installation
 #### Server Side (server_check)
@@ -51,7 +51,7 @@ sudo systemctl start server_check.service
 sudo systemctl status server_check.service
 ```
 
-#### Router side (server_start)
+#### OpenWRT router side (server_start)
 1. Download script to location `/bin/server-start.sh`
 ```
 curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/server_monitor/main/openwrt/server-start.sh' -o "/bin/server-start.sh" && chmod 755 "/bin/server-start.sh"
