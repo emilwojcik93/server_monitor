@@ -16,7 +16,7 @@ sudo apt-get update && sudo apt-get install python3 python3-pip curl nano
 #### OpenWRT router side
 Script is writen to check TCPdump output:
 ```
-opkg update && opkg install tcpdump
+opkg update && opkg install tcpdump inotifywait
 ```
 ## Installation
 
