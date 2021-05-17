@@ -14,7 +14,7 @@ Script is written in python3, to work properly it need interpreter and dependenc
 sudo apt-get update && sudo apt-get install python3 python3-pip curl nano
 ```
 #### OpenWRT router side
-Script is writen to check TCPdump output:
+Script is writen to check output of TCPdump and inotifywait:
 ```
 opkg update && opkg install tcpdump inotifywait
 ```
