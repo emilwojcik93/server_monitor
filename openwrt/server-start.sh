@@ -38,12 +38,12 @@ function domain_check {
 
 while ! ping -q -W 1 -c 1 $target >/dev/null; do
   if tcp_check; then
-    echo "/usr/bin/etherwake -D -i "$iface" "$mac" 2>&1"
-#    sleep 10
+    /usr/bin/etherwake -D -i "$iface" "$mac" 2>&1
+    sleep 30
   fi &
   if domain_check; then
-    echo "/usr/bin/etherwake -D -i "$iface" "$mac" 2>&1"
-#    sleep 10
+    /usr/bin/etherwake -D -i "$iface" "$mac" 2>&1
+    sleep 30
   fi &
 done
 
