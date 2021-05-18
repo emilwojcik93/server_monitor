@@ -7,6 +7,15 @@ import re
 import requests
 import subprocess
 import time
+from datetime import datetime
+from datetime import timedelta
+
+def proxy_was_requested (): 
+    cutoff = datetime.utcnow() - timedelta(minutes=1)
+    mtime = datetime.utcfromtimestamp(os.path.getmtime('/var/log/nginx/access.log'))
+    if mtime < cutoff:
+        return True
+    return False
 
 if len(sys.argv) < 3:
     print("Please declare username and password\nUsaga:\nserver_check.py <usename> <password>")
@@ -45,7 +54,7 @@ def ssh_has_connected_clients():
         return True
 
 def server_is_busy():
-    if empty_downloads() and not samba_has_connected_clients() and not ssh_has_connected_clients():
+    if empty_downloads() and not samba_has_connected_clients() and not ssh_has_connected_clients() and proxy_was_requested():
         return False
     else:
         return True
